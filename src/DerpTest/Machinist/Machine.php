@@ -72,22 +72,22 @@ class Machine implements \ArrayAccess, \IteratorAggregate
         }
     }
 
-    public function offsetExists($offset)
+    public function offsetExists(mixed $offset): bool
     {
         return isset($this->data[$offset]);
     }
 
-    public function offsetGet($offset)
+    public function offsetGet(mixed $offset): mixed
     {
         return array_key_exists($offset, $this->data) ? $this->data[$offset] : null;
     }
 
-    public function offsetSet($offset, $value)
+    public function offsetSet(mixed $offset, mixed $value): void
     {
         $this->data[$offset] = $value;
     }
 
-    public function offsetUnset($offset)
+    public function offsetUnset(mixed $offset): void
     {
         if (array_key_exists($offset, $this->data))
             unset($this->data[$offset]);
@@ -113,7 +113,7 @@ class Machine implements \ArrayAccess, \IteratorAggregate
         $this->offsetUnset($k);
     }
 
-    public function getIterator()
+    public function getIterator(): \Traversable
     {
         return new \ArrayIterator($this->data);
     }
